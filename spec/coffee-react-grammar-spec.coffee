@@ -160,6 +160,15 @@ describe 'Coffee-React grammar', ->
           'entity.other.attribute-name.html'
         ]
 
+    it 'tokenizes props with embedded CoffeeScript', ->
+      # thing = grammar.tokenizeLine '<input onChange={=> @_onChange(something)} className="bla" />'
+      # thing = grammar.tokenizeLine '<input className="bla" />'
+      thing =
+        grammar.tokenizeLine '<input onChange={=> @_onChange(something)} className="bla"></input>'
+      {tokens} = thing
+
+      expect(tokens.length).toEqual 12
+
     it 'tokenizes interpolated CoffeeScript strings', ->
       {tokens} = grammar.tokenizeLine '<div className="#{@var}"></div>'
 
